@@ -46,8 +46,8 @@ class CommDriver(Singe):
                     self.driver = webdriver.Firefox(options=self.option)
                 else:
                     raise Exception(f'{browname} is not supported')
-                self.driver.implicitly_wait(implicitly_time)
-                self.driver.set_window_size(1920, 1080)
+            self.driver.implicitly_wait(implicitly_time)
+            self.driver.set_window_size(1920, 1080)
         return self.driver
 
 

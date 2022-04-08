@@ -1,6 +1,11 @@
-from comm_driver import CommDriver
+from xinliUI.common.comm_driver import CommDriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from xinliUI.config.config import wait_poll_frequency, wait_time
+from xinliUI.utils.all_path import screenshots_path, log_save_path
+from xinliUI.utils.log import log
+from xinliUI.utils.get_yaml import get_yaml_data
+from selenium.webdriver import ActionChains
 
 
 class BasePage():
@@ -17,10 +22,15 @@ class BasePage():
         8. 输入了错误的用户名和密码后提示信息太快，导致无法获取到，获取元素信息也要等待
     """
 
-    def __init__(self):
+    def __init__(self, yaml_path):
         """
-        初始化一个浏览器
+        初始化一个浏览器,并获取elements.yaml中的定位方法和元素
+        page_object的class名称要和elements.yaml的分类名称一致
+        :param yaml_path: 传需要读取的elements的yaml文件
         """
+        self.locators = get_yaml_data(yaml_path)[self.__class__.__name__]
+        for element, locator in self.locators.items():
+            setattr(self, element, locator)
         self.driver = CommDriver().get_driver()
 
     def open_url(self, url):
@@ -53,7 +63,7 @@ class BasePage():
         :param locator:  元素定位器，示例：['css selector','.el-message--error']， ['id','btnLogin']
         :return:
         """
-        self.get_element(*locator).click()
+        self.get_element(locator).click()
 
     def input_text(self, locator, text, append=False):
         """
@@ -78,3 +88,57 @@ class BasePage():
         eles = self.get_elements(locator)
         return [ele.text for ele in eles]
 
+    def wait_click_element(self, locator):
+        """
+        显示等待的点击
+        :param locator:  元素定位器，示例：['css selector','.el-message--error']， ['id','btnLogin']
+        :return:
+        """
+        WebDriverWait(self.driver, timeout=wait_time, poll_frequency=wait_poll_frequency)\
+            .until(EC.visibility_of_element_located(locator)).click()
+
+    def wait_get_element_text(self, locator):
+        """
+        显示等待获取文本
+        :param locator: 元素定位器，示例：['css selector','.el-message--error']， ['id','btnLogin']
+        :return: 返回文本信息
+        """
+        return WebDriverWait(self.driver, timeout=wait_time, poll_frequency=wait_poll_frequency) \
+            .until(EC.visibility_of_element_located(locator)).text
+
+    def isexist_element(self, locator, Action=None):
+        """
+        判断元素是否存在
+        :param locator: 元素定位器，示例：['css selector','.el-message--error']， ['id','btnLogin']
+        :param Action: 元素名称，只有会报错的时候用的上
+        :return: 返回元素
+        """
+        try:
+            element=WebDriverWait(self.driver, timeout=wait_time, poll_frequency=wait_poll_frequency) \
+                .until(EC.element_to_be_clickable(locator))
+            return element
+        except:
+            self.driver.save_screenshot(screenshots_path + f'{Action}.png')
+            log(log_save_path).error(f'{Action}元素无法定位')
+            return False
+
+    def move_to_element(self, locator):
+        """
+        用于退出登录。移动到一个点
+        :param locator: 元素定位器，示例：['css selector','.el-message--error']， ['id','btnLogin']
+        :return:
+        """
+        ele = self.get_element(locator)
+        ActionChains(self.driver).move_to_element(ele).perform()
+
+    def get_list_elements(self, locator):
+        """
+        获取页面的一列内容，10个
+        :param locator: 元素定位器，示例：['css selector','.el-message--error']， ['id','btnLogin']
+        :return: 返回该列内容的list
+        """
+        ele_list = []
+        for i in range(1, 11):
+            locator[-1] = locator[-1].replace('%s', str(i))
+            ele_list.append(self.wait_get_element_text(locator))
+        return ele_list

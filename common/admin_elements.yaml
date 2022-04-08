@@ -1,0 +1,63 @@
+LoginPage: # 登录页面元素
+  switch_phone_login: ['css selector', 'div.tab-item.phone-way']
+  iphone_input: ['css selector', 'div:nth-child(1) > div > div > input']
+  code_input: ['css selector', 'div:nth-child(2) > div > div > input']
+  login_button: ['css selector', 'div.loginBtn.xl-button--primary']
+
+AdminHomePage: # 管理后台首页元素
+  admin_home_page: ['xpath', '//a[text()="新雳e助手管理后台"]'] # 回到首页按钮，可以用于判断有没有到首页
+  admin_info: ['css selector', 'ul:nth-child(2) > li > div > span'] # 管理后台用户名显示处
+  admin_logout: ['xpath', '//li[text()="退出"]'] # 退出登录按钮
+  admin_logout_off_button: ['css selector', 'div.el-message-box__btns > button:nth-child(1)'] # 退出登录的取消按钮
+  admin_logout_sure_button: ['css selector', 'div.el-message-box__btns > button:nth-child(2)'] # 退出登录的确定按钮
+  admin_change_pwd: ['xpath', '//li[text()="修改密码"]'] # 修改密码按钮
+  admin_old_pwd_input: ['xpath', '//div[2]/form/div[2]/div/div/input'] # 原密码输入框
+  admin_new_pwd_input: ['xpath', '//div[2]/form/div[3]/div/div/input'] # 新密码输入框
+  determine_admin_new_pwd_input: ['xpath', '//div[2]/form/div[4]/div/div/input'] # 确定密码输入框
+  admin_change_pwd_off_button: ['css selector', 'span > button.el-button.el-button--default'] # 修改密码弹框的取消按钮
+  admin_change_pwd_sure_button: ['css selector', 'span > button.el-button.el-button--primary'] # 修改密码弹框的确定按钮
+  agent_management_button: ['xpath', '//li[3]/div'] # 代理商管理选项
+  agent_management: ['css selector', 'li.el-submenu.is-opened > ul > li:nth-child(1)'] # 代理商管理列表下面的代理商管理
+  Agent_staff_management: ['css selector', 'li.el-submenu.is-opened > ul > li:nth-child(2)'] # 代理商管理-->代理商员工管理
+  Agent_customer_management: ['css selector', 'li.el-submenu.is-opened > ul > li:nth-child(3)'] # 代理商管理-->代理商客户管理
+  Agent_level_management: ['css selector', 'li.el-submenu.is-opened > ul > li:nth-child(4)'] # 代理商管理-->代理商等级管理
+  Agent_area_management: ['css selector', 'li.el-submenu.is-opened > ul > li:nth-child(5)'] # 代理商管理-->代理商区域管理
+
+AgentManagementPage: # 代理商管理页面元素
+  admin_home_page: ['xpath', '//a[text()="新雳e助手管理后台"]'] # 回到首页按钮，可以用于判断有没有到首页
+  agent_number_search_input: ['css selector', 'form > div:nth-child(1) > div > div > input'] # 代理商编号搜索框
+  agent_name_search_input: ['css selector', 'form > div:nth-child(2) > div > div > input'] # 代理商名称搜索框
+  phone_search_input: ['css selector', 'form > div:nth-child(3) > div > div > input'] # 管理员手机号码搜索框
+  agent_area_search: ['css selector', 'form > div:nth-child(4) > div > div'] # 代理区域搜索框
+  first_agent_area_search: ['xpath', '//div[3]/div[1]/div[1]/ul/li[1]'] # 选择第一个代理区域搜索
+  agent_level_search: ['css selector', 'form > div:nth-child(5) > div > div'] # 代理等级搜索框
+  first_agent_level_search: ['xpath', '//div[4]/div[1]/div[1]/ul/li[1]'] # 选择第一个代理等级搜索
+  debtState_search: ['css selector', 'form > div:nth-child(6) > div > div'] # 欠款状态搜索框
+  havedebt_search: ['xpath', '//div[5]/div[1]/div[1]/ul/li[1]'] # 有欠款搜索
+  notdebt_search: ['xpath', '//div[5]/div[1]/div[1]/ul/li[2]'] # 无欠款搜索
+  state_search: ['css selector', 'form > div:nth-child(7) > div > div'] # 管理员状态搜索框
+  disabled_search: ['xpath', '//div[6]/div[1]/div[1]/ul/li[2]'] # 被禁用的管理员搜索
+  normal_search: ['xpath','//div[6]/div[1]/div[1]/ul/li[1]'] # 正常管理员搜索
+  higheragent_name_search_input: ['css selector', 'form > div:nth-child(8) > div > div > input'] # 上级代理搜索框
+  search_button: ['css selector', 'div:nth-child(9) > div > button.el-button.el-button--primary.el-button--small'] # 搜索
+  reset_button: ['css selector', 'div:nth-child(9) > div > button.el-button.el-button--default.el-button--small'] # 重置
+  add_agent_button: ['css selector', 'div.option_content > div > button'] # 添加代理商
+  first_line_agent: ['xpath', '//div[3]/table/tbody/tr[1]'] # 第一行代理商数据
+  first_agent_number: ['xpath', '//div[3]/table/tbody/tr[1]/td[1]/div'] # 第一个代理商编号
+  first_agent_name: ['xpath', '//div[3]/table/tbody/tr[1]/td[2]/div'] # 第一个代理商名称
+  many_agent_name: ['xpath', '//div[3]/table/tbody/tr[%s]/td[2]/div'] # 用来获取一页的代理商名称
+  first_higheragent_name: ['xpath', '//div[3]/table/tbody/tr[1]/td[3]/div'] # 第一个上级代理商名称
+  many_higheragent_name: ['xpath', '//div[3]/table/tbody/tr[%s]/td[3]/div'] # 用来获取该页的所有上级代理商名称
+  first_agent_area: ['xpath', '//div[3]/table/tbody/tr[1]/td[4]/div'] # 第一个代理区域
+  many_agent_area: ['xpath', '//div[3]/table/tbody/tr[%s]/td[4]/div'] # 用来获取该页的所有代理区域
+  first_staff_number: ['xpath', '//div[3]/table/tbody/tr[1]/td[5]/div'] # 第一个代理商员工数量
+  first_credit_line: ['xpath', '//div[3]/table/tbody/tr[1]/td[6]/div'] # 第一个代理商信用额度
+  many_credit_line: ['xpath', '//div[3]/table/tbody/tr[%s]/td[6]/div'] # 用来获取该页的所有代理商信用额度
+  first_balance: ['xpath', '//div[3]/table/tbody/tr[1]/td[7]/div'] # 第一个代理商信用额度余额
+  many_balance: ['xpath', '//div[3]/table/tbody/tr[%s]/td[7]/div'] # 用来获取该页的所有代理商信用额度余额
+  first_agent_stats: ['xpath', '//div[3]/table/tbody/tr[1]/td[8]/div'] # 第一个代理商状态
+  many_agent_stats: ['xpath', '//div[3]/table/tbody/tr[%s]/td[8]/div'] # 用来获取该页的所有代理商状态
+  first_agent_check_button: ['xpath', '//div[3]/table/tbody/tr[1]/td[9]/div/button[1]'] # 第一个代理商查看按钮
+  first_agent_edit_button: ['xpath', '//div[3]/table/tbody/tr[1]/td[9]/div/button[2]'] # 第一个代理商编辑按钮
+  first_agent_set_products_button: ['xpath', '//div[3]/table/tbody/tr[1]/td[9]/div/button[3]'] # 第一个代理商设置代理产品按钮
+  first_agent_disabled_button: ['xpath', '//div[3]/table/tbody/tr[1]/td[9]/div/button[3]'] # 第一个代理商禁用按钮

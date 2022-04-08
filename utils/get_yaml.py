@@ -1,5 +1,4 @@
 import yaml
-from all_path import test_login_data_yaml_path
 
 
 def get_yaml_data(yaml_path):
@@ -8,4 +7,4 @@ def get_yaml_data(yaml_path):
 
 
 if __name__ == '__main__':
-    print(get_yaml_data(f"{test_login_data_yaml_path}"))
+    print(get_yaml_data(r"D:\PythonObjects\xinliUI\common\admin_elements.yaml")["AgentManagementPage"]['many_agent_name'][1])

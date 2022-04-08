@@ -5,8 +5,10 @@ import os
 
 project_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 举例
-test_login_data_yaml_path = os.path.join(project_path, "case_datas\\") + "admin_login_data.yaml"
+screenshots_path = os.path.join(project_path, "outputs\\screenshots\\")
+log_save_path = os.path.join(project_path, "outputs\\logs\\")
+admin_elements_yaml_path = os.path.join(project_path, "common\\") + "admin_elements.yaml"
 
 
 if __name__ == '__main__':
-    print(test_login_data_yaml_path)
+    print(admin_elements_yaml_path)
