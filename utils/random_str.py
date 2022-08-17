@@ -12,4 +12,4 @@ def get_random_str(length):
 
 
 if __name__ == '__main__':
-    print(get_random_str(3))
+    print(get_random_str(10))
